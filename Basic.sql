@@ -74,3 +74,39 @@ SELECT yr, subject, winner FROM nobel where subject = 'Medicine' AND yr < 1910 O
 subject = 'Literature' AND yr >= 2004
 
 SELECT * FROM nobel WHERE winner = 'PETER GRÜNBERG'
+
+SELECT * FROM nobel WHERE winner = 'EUGENE O''NEILL'
+
+SELECT winner, yr, subject from nobel where LEFT(winner, 3) = 'Sir' ORDER BY yr DESC, winner
+
+SELECT winner, subject
+  FROM nobel
+ WHERE yr=1984
+ ORDER BY subject IN ('Physics','Chemistry'), subject,winner
+ 
+ SELECT name FROM world
+  WHERE population >
+     (SELECT population FROM world
+      WHERE name='Russia')
+
+SELECT name
+FROM world 
+WHERE continent = 'Europe' 
+          AND 
+(gdp/population) > (SELECT ROUND((gdp/population),-1) FROM world WHERE name = 'United Kingdom')
+
+SELECT name, continent 
+from world 
+where 
+continent IN (SELECT continent FROM world WHERE name = 'Argentina' OR name = 'Australia')
+
+SELECT name, population FROM world WHERE population > (SELECT population FROM world WHERE name = 'Canada') AND population < (SELECT population FROM world WHERE name ='Poland') 
+
+SELECT name, CONCAT(ROUND((100*population/(SELECT population FROM world WHERE name = 'Germany')),0), '%') FROM world WHERE continent = 'EUROPE'
+
+SELECT name FROM world WHERE gdp > (SELECT MAX(gdp) FROM world WHERE continent = 'Europe')
+
+SELECT continent, name, area FROM world x
+  WHERE area >= ALL
+    (SELECT MAX(area) FROM world y
+        WHERE y.continent=x.continent)
