@@ -8,6 +8,8 @@ SELECT population FROM world
   
   SELECT name, area FROM world
   WHERE area BETWEEN 200000 AND 250000
+  
+  ## SQL  quiz world
 
 SELECT name, continent, population FROM world
 
@@ -41,6 +43,8 @@ FROM world where LEFT(name,1) = LEFT(capital, 1) AND name <> capital
 SELECT name
    FROM world
 WHERE name LIKE '%a%' AND name LIKE '%e%'AND name LIKE '%i%' AND name LIKE '%o%' AND name LIKE '%u%' AND name NOT LIKE '% %'
+
+## SQL Quiz Nobel
 
 SELECT yr, subject, winner
   FROM nobel
@@ -110,3 +114,29 @@ SELECT continent, name, area FROM world x
   WHERE area >= ALL
     (SELECT MAX(area) FROM world y
         WHERE y.continent=x.continent)
+        
+        SELECT name, continent, population FROM world WHERE continent NOT IN(SELECT distinct continent FROM world where population > 25000000)
+        
+SELECT SUM(population)
+FROM world
+
+SELECT DISTINCT continent FROM WORLD
+
+SELECT SUM(gdp) from world WHERE continent = 'Africa'
+
+SELECT Count(name) FROM world WHERE area >= 1000000
+
+SELECT SUM(population) FROM world WHERE name IN('Estonia', 'Latvia', 'Lithuania')
+
+SELECT continent, Count(name) FROM world GROUP BY continent
+
+SELECT continent, Count(name) FROM world WHERE population >= 10000000 GROUP BY continent
+
+SELECT continent FROM world GROUP BY continent HAVING SUM(population) >= 100000000 
+
+SELECT matchid, player FROM goal 
+  WHERE teamid LIKE '%GER'
+  
+  SELECT id,stadium,team1,team2
+  FROM game WHERE id LIKE '1012%'
+
