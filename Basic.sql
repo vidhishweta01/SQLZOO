@@ -151,3 +151,15 @@ SELECT player,teamid, stadium, mdate
  WHERE gtime<=10
  
  SELECT mdate, teamname FROM game JOIN eteam ON (team1=eteam.id) WHERE coach = 'Fernando Santos'
+ 
+ SELECT player
+  FROM game JOIN goal ON(id=matchid)
+WHERE stadium = 'National Stadium, Warsaw'
+
+SELECT DISTINCT player
+  FROM game JOIN goal ON matchid = id 
+    WHERE teamid!='GER' AND (team1='GER' OR team2='GER')
+    
+    SELECT teamname, Count(gtime)
+  FROM eteam JOIN goal ON id=teamid
+  GROUP BY teamname
